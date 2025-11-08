@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Send, Heart, CheckCircle } from 'lucide-react';
+import { Users, Send, Heart, CheckCircle, Ticket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { toast } from '@/components/ui/use-toast';
 
-const SponsorshipSection = () => {
+const SponsorshipSection = ({ setActiveSection }) => {
   const [balance, setBalance] = useState(0);
   const [beneficiaryName, setBeneficiaryName] = useState('');
   const [beneficiaryPhone, setBeneficiaryPhone] = useState('');
@@ -17,7 +17,7 @@ const SponsorshipSection = () => {
   useEffect(() => {
     const savedBalance = localStorage.getItem('wallet_balance');
     const savedSponsorships = localStorage.getItem('sponsorships');
-    
+
     if (savedBalance) setBalance(parseFloat(savedBalance));
     if (savedSponsorships) setSponsorships(JSON.parse(savedSponsorships));
   }, []);
@@ -33,7 +33,7 @@ const SponsorshipSection = () => {
     }
 
     const sponsorAmount = parseFloat(amount);
-    
+
     if (sponsorAmount <= 0) {
       toast({
         title: "Montant invalide",
@@ -117,7 +117,7 @@ const SponsorshipSection = () => {
 
             <Card className="glass-effect p-8">
               <h3 className="text-2xl font-bold mb-6 text-gray-800">Recharger le wallet d'un bénéficiaire</h3>
-              
+
               <div className="space-y-6">
                 <div>
                   <Label htmlFor="beneficiaryName" className="text-base font-semibold mb-2 block">
@@ -177,7 +177,7 @@ const SponsorshipSection = () => {
           >
             <Card className="glass-effect p-8">
               <h3 className="text-2xl font-bold mb-6 text-gray-800">Mes parrainages</h3>
-              
+
               {sponsorships.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
@@ -187,6 +187,14 @@ const SponsorshipSection = () => {
                 </div>
               ) : (
                 <div className="space-y-4">
+                  <Button
+                    variant="default"
+                    className="w-full gradient-primary text-white text-lg h-14 shadow-xl hover:shadow-2xl transition-all gap-2"
+                    onClick={() => setActiveSection('ticket')}
+                  >
+                    <Ticket className="w-5 h-5" />
+                    Mes tickets
+                  </Button>
                   {sponsorships.map((sponsorship) => (
                     <motion.div
                       key={sponsorship.id}
@@ -221,6 +229,8 @@ const SponsorshipSection = () => {
                           year: 'numeric',
                         })}
                       </p>
+
+
                     </motion.div>
                   ))}
                 </div>

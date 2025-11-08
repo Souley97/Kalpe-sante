@@ -51,9 +51,9 @@ function App() {
 
   const sections = {
     home: <Home setActiveSection={setActiveSection} />,
-    wallet: <WalletSection />,
-    sponsor: <SponsorshipSection />,
-    ticket: <TicketSection />,
+    wallet: <WalletSection setActiveSection={setActiveSection} />,
+    sponsor: <SponsorshipSection setActiveSection={setActiveSection} />,
+    ticket: <TicketSection setActiveSection={setActiveSection} />,
     agent: <PublicAgentSection />,
     dashboard: <DashboardSection />,
   };

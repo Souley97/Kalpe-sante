@@ -147,10 +147,7 @@ const TicketSection = () => {
                         <span className="opacity-90">Bénéficiaire:</span>
                         <span className="font-semibold">{ticket.beneficiaryName}</span>
                       </div>
-                      <div className="flex justify-between">
                       
-                        <span className="font-semibold">{ticket.code}</span>
-                      </div>
                       <div className="flex justify-between">
                         <span className="opacity-90">Montant Initial:</span>
                         <span className="font-semibold">{(ticket.amount || 0).toLocaleString()} FCFA</span>

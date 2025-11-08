@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Wallet, Plus, ArrowUpRight, CreditCard, Smartphone } from 'lucide-react';
+import { Wallet, Plus, ArrowUpRight, CreditCard, Smartphone, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { toast } from '@/components/ui/use-toast';
 
-const WalletSection = () => {
+const WalletSection = ({ setActiveSection }) => {
   const [balance, setBalance] = useState(0);
   const [amount, setAmount] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('orange');
@@ -170,6 +170,8 @@ const WalletSection = () => {
             <Card className="glass-effect p-8">
               <h3 className="text-2xl font-bold mb-6 text-gray-800">Historique des transactions</h3>
               
+              
+              
               {transactions.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
@@ -179,13 +181,25 @@ const WalletSection = () => {
                 </div>
               ) : (
                 <div className="space-y-4">
+                  <Button 
+                variant="default" 
+                className="w-full gradient-primary text-white text-lg h-14 shadow-xl hover:shadow-2xl transition-all gap-2"
+                onClick={() => setActiveSection('sponsor')}
+              >
+                <Users className="w-5 h-5" />
+                Parrainer
+              </Button>
                   {transactions.map((transaction) => (
+
+                    
                     <motion.div
                       key={transaction.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="flex items-center justify-between p-4 rounded-xl bg-white/50 border border-gray-200"
                     >
+                      {/* bouton vers au parrainer */}
+              
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
                           <ArrowUpRight className="w-6 h-6 text-white" />
